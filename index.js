@@ -2,6 +2,9 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
+const deployCommands = require('./deploy-commands.js');
+
+deployCommands();
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -21,7 +24,6 @@ client.once(Events.ClientReady, () => {
 
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
-
 
 	const command = client.commands.get(interaction.commandName);
 
